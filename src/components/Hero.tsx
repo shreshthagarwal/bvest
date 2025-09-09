@@ -5,12 +5,6 @@ import Image from 'next/image';
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated floating elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#36D399]/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-20 w-72 h-72 bg-[#38BDF8]/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#2563EB]/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-      </div>
 
       <div className="relative z-10 w-full max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -28,7 +22,7 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="bg-gradient-to-r from-[#36D399] to-[#38BDF8] bg-clip-text text-transparent">
-                BVEST 2023
+                BVEST 2025
               </span>
               <br />
               <span className="text-white">Greenovate</span>
@@ -42,10 +36,10 @@ export function Hero() {
             >
               <div className="inline-flex items-center px-4 py-2 bg-[#111827] rounded-full border border-[#1F2937] mb-4">
                 <span className="h-2 w-2 bg-[#36D399] rounded-full mr-2 animate-pulse"></span>
-                <span className="text-[#E5E7EB] font-medium">October 8-9, 2023</span>
+                <span className="text-[#E5E7EB] font-medium">October 8-9, 2025</span>
               </div>
               <p className="text-lg md:text-xl text-[#E5E7EB] mt-4 max-w-lg mx-auto lg:mx-0">
-                Join us for 24 hours of innovation, creativity, and sustainable technology solutions
+              Engineering a Greener Tomorrow              
               </p>
             </motion.div>
 
@@ -79,7 +73,6 @@ export function Hero() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-xl">
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#36D399]/20 to-[#38BDF8]/20 rounded-3xl blur-xl opacity-70 animate-pulse"></div>
               <div className="relative">
                 <Image
                   src="/logo.png"
