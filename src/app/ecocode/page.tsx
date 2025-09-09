@@ -23,8 +23,10 @@ export default function EcoCodePage() {
     <Timeline key="timeline" />,
   ];
 
+  const totalSections = sections.length;
+
+  // Precompute transforms at top level
   const transforms = sections.map((_, i) => {
-    const totalSections = sections.length;
     const sectionStart = i / totalSections;
     const sectionEnd = (i + 1) / totalSections;
 
@@ -68,12 +70,9 @@ export default function EcoCodePage() {
                 justifyContent: "center",
                 padding: "0 1rem",
                 pointerEvents: i === 0 ? "auto" : "none",
-                background: 'transparent',
               }}
             >
-              <div className="w-full max-w-6xl bg-transparent">
-                {section}
-              </div>
+              <div className="w-full max-w-6xl">{section}</div>
             </motion.div>
           ))}
         </div>

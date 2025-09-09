@@ -16,32 +16,34 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const sections = [
-    <Hero key="hero" />,
-    <Hackathon key="hackathon" />,
-    <EventDetails key="event-details" />,
-  ];
+  const sections = [<Hero key="hero" />, <Hackathon key="hackathon" />, <EventDetails key="event-details" />];
 
-  // Calculate transforms for each section
-  const transforms = sections.map((_, i) => {
-    const sectionStart = i / sections.length;
-    const sectionEnd = (i + 1) / sections.length;
-    const fadeInEnd = sectionStart + (1 / sections.length) * 0.30;
-    const fadeOutStart = sectionEnd - (1 / sections.length) * 0.30;
+  const totalSections = sections.length;
 
-    return {
-      opacity: useTransform(
-        scrollYProgress,
-        [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
-        [i === 0 ? 1 : 0, 1, 1, 0]
-      ),
-      x: useTransform(
-        scrollYProgress,
-        [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
-        [i === 0 ? "0%" : "50%", "0%", "0%", "-50%"]
-      ),
-      zIndex: sections.length - i
-    };
+  // Define start and end for each section first
+  const sectionBounds = sections.map((_, i) => {
+    const sectionStart = i / totalSections;
+    const sectionEnd = (i + 1) / totalSections;
+    const fadeInEnd = sectionStart + (1 / totalSections) * 0.3;
+    const fadeOutStart = sectionEnd - (1 / totalSections) * 0.3;
+    return { sectionStart, fadeInEnd, fadeOutStart, sectionEnd };
+  });
+
+  // Call hooks individually at top level
+  const transforms = sectionBounds.map(({ sectionStart, fadeInEnd, fadeOutStart, sectionEnd }, i) => {
+    const opacity = useTransform(
+      scrollYProgress,
+      [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
+      [i === 0 ? 1 : 0, 1, 1, 0]
+    );
+
+    const x = useTransform(
+      scrollYProgress,
+      [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
+      [i === 0 ? "0%" : "50%", "0%", "0%", "-50%"]
+    );
+
+    return { opacity, x, zIndex: totalSections - i };
   });
 
   return (
@@ -69,9 +71,7 @@ export default function Home() {
                 pointerEvents: "none",
               }}
             >
-              <div className="w-full max-w-6xl pointer-events-auto">
-                {section}
-              </div>
+              <div className="w-full max-w-6xl pointer-events-auto">{section}</div>
             </motion.div>
           ))}
         </div>
