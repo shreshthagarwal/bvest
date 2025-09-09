@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { HackathonLanding } from "@/components/hackathon/HackathonLanding";
 import { HackathonAbout } from "@/components/hackathon/HackathonAbout";
-import { HackathonGuests } from "@/components/hackathon/HackathonGuests";
 import Timeline from "@/components/Timeline";
 import HowToApply from "@/components/HowToApply";
 import ProblemStatements from "@/components/ProblemStatements";
