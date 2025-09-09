@@ -22,31 +22,26 @@ export default function Home() {
     <EventDetails key="event-details" />,
   ];
 
+  // Calculate transforms for each section
   const transforms = sections.map((_, i) => {
-    const totalSections = sections.length;
-    const sectionStart = i / totalSections;
-    const sectionEnd = (i + 1) / totalSections;
-    const sectionMid = (sectionStart + sectionEnd) / 2;
+    const sectionStart = i / sections.length;
+    const sectionEnd = (i + 1) / sections.length;
+    const fadeInEnd = sectionStart + (1 / sections.length) * 0.30;
+    const fadeOutStart = sectionEnd - (1 / sections.length) * 0.30;
 
-    // Window where section is fully visible (snap effect)
-    const fadeInEnd = sectionStart + (1 / totalSections) * 0.30;
-    const fadeOutStart = sectionEnd - (1 / totalSections) * 0.30;
-
-    const opacity = useTransform(
-      scrollYProgress,
-      [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
-      [i === 0 ? 1 : 0, 1, 1, 0]
-    );
-
-    const x = useTransform(
-      scrollYProgress,
-      [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
-      [i === 0 ? "0%" : "50%", "0%", "0%", "-50%"]
-    );
-
-    const zIndex = sections.length - i;
-
-    return { opacity, x, zIndex };
+    return {
+      opacity: useTransform(
+        scrollYProgress,
+        [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
+        [i === 0 ? 1 : 0, 1, 1, 0]
+      ),
+      x: useTransform(
+        scrollYProgress,
+        [sectionStart, fadeInEnd, fadeOutStart, sectionEnd],
+        [i === 0 ? "0%" : "50%", "0%", "0%", "-50%"]
+      ),
+      zIndex: sections.length - i
+    };
   });
 
   return (
